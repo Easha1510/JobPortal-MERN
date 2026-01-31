@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import assets from '../assets/assets'
+import {assets} from '../assets/assets'
 
 const RecruiterLogin = () => {
 
@@ -25,11 +25,12 @@ const RecruiterLogin = () => {
             <p className='text-sm'>Welcome back! Please sign in to continue</p>
             { state === "Sign Up" && isTextDataSubmited
             ? <>
-            <div>
+            <div className='flex items-center gap-4 my-10'>
               <label htmlFor="image">
-                <img src={assets.upload_area} alt="" />
-                <input type="file" id='image' hidden/>
+                <img className='w-16 rounded-full' src={image ? URL.createObjectURL(image):assets.upload_area} alt="" />
+                <input onChange={e=>setImage(e.target.files[0])} type="file" id='image' hidden/>
               </label>
+              <p>Upload Company <br />logo</p>
             </div>
             </>
           :  <>
@@ -49,9 +50,10 @@ const RecruiterLogin = () => {
               <input className='outline-none text-sm' onChange={e=> setPassword(e.target.value)} value={password} type="password" placeholder='Password' required />
             </div>
             </>}
-            <p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot password</p>
 
-            <button type='submit' className='bg-blue-600 w-full text-white py-2 rounded-full'>
+            {state === "Login" && <p className='text-sm text-blue-600 mt-4 cursor-pointer'>Forgot password</p>}
+
+            <button type='submit' className='bg-blue-600 w-full text-white py-2 rounded-full mt-4'>
               {state === 'Login' ? 'login' : isTextDataSubmited ? 'create account' : 'next'}
             </button>
 
@@ -61,10 +63,9 @@ const RecruiterLogin = () => {
               : <p className='mt-5 text-center'>Already have an account? <span className='text-blue-600 cursor-pointer' onClick={()=> setState("Login")}>Login</span> </p>
             }
             
-        </form>
+        </form> 
     </div>
   )
 }
 
 export default RecruiterLogin 
-
