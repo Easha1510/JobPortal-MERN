@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {assets} from '../assets/assets'
 
 const RecruiterLogin = () => {
@@ -11,6 +11,8 @@ const RecruiterLogin = () => {
     const [image,setImage] =useState(false)
     const [isTextDataSubmited,setIsTextDataSubmited]= useState(false)
 
+    const {setShowRecruiterLogin} = useContext(AppContext)
+    
     const onSubmitHandler = async(e)=>{
       e.preventDefault()
       if(state == "Sign Up" && !isTextDataSubmited){
@@ -63,10 +65,10 @@ const RecruiterLogin = () => {
               : <p className='mt-5 text-center'>Already have an account? <span className='text-blue-600 cursor-pointer' onClick={()=> setState("Login")}>Login</span> </p>
             }
             
+            <img className='absolute top-5 right-5 cursor-pointer' src={assets.cross_icon} alt="" />
         </form> 
     </div>
   )
 }
 
 export default RecruiterLogin 
-// 3:48:26
